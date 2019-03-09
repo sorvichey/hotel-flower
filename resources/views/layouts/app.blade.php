@@ -72,10 +72,9 @@
                         <a class="nav-link" href="{{url('/admin/dashboard')}}"><i class="fa fa-tachometer text-primary"></i> {{$lb_dashboard}} </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/admin/post')}}"><i class="fa fa-picture-o text-success"></i> Post</a>
-                        <a class="nav-link" href="{{url('/admin/video')}}"><i class="fa fa-youtube text-danger"></i> Video</a>
-                        <a class="nav-link" href="{{url('/admin/advertisement')}}"><i class="fa fa-money text-warning"></i> Advertisement</a>
-                        <a class="nav-link" href="{{url('/admin/gift')}}"><i class="fa fa-gift text-info"></i> Gift</a>
+                        <a class="nav-link" href="{{url('/admin/post')}}"><i class="fa fa-thumb-tack text-success"></i> Post</a>
+                        <a class="nav-link" href="{{url('/admin/page')}}"><i class="fa fa-file text-success"></i> page</a>
+                        <a class="nav-link" href="{{url('/admin/video')}}"><i class="fa fa-youtube text-success"></i> Video</a>
                     </li>
                     <li class="nav-item nav-dropdown">
                         <a href="#" class="nav-link nav-dropdown-toggle">
@@ -96,7 +95,10 @@
                             <i class="fa fa-cog text-success"></i> Settings</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('/admin/category')}}"><i class="fa fa-tags"></i>Post Category</a>
+                                <a class="nav-link" href="{{url('/admin/social')}}"><i class="fa fa-tags"></i>Social</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/admin/slide')}}"><i class="fa fa-picture-o"></i>Slide</a>
                             </li>
                         </ul>
                     </li>

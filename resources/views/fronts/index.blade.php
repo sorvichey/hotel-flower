@@ -1,143 +1,194 @@
-
 @extends('layouts.front')
-@section('content')  
-<div class="frame-content container">
-    <?php $last_video = DB::table('videos')->where('active', 1)->orderBy('id', 'desc')->first();?>
-    <div class="container py-3">
+@section('content')
+    <?php $slides = DB::table('slides')->where('active', 1)->orderBy('order')->get(); ?>
+    <section class="pb_section" id="section-about">
+      <div class="container">
         <div class="row">
-            <div class="pb-4 col-md-7">
-                <iframe class="last_video"  src="{{$last_video->url}}" frameborder="0"></iframe>
+          <div class="col-lg-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <?php $c = 0; ?>
+                    @foreach($slides as $sli)
+                    
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$c++}}" ></li>
+                   
+                    @endforeach
+                </ol>
+                <div class="carousel-inner">
+                    <?php $i = 1;?>
+                    @foreach($slides as $sli)
+                    @if($i++==1)
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{asset('fronts/slides/'.$sli->photo)}}" alt="First slide">
+                    </div>
+                    @else
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{asset('fronts/slides/'.$sli->photo)}}" alt="Second slide">
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
             </div>
-        <div class="col-md-5">
-            <p><strong>វាយលេខពី 00 - 99 អ្នកមានឪកាសឈ្នះ 1$</strong></p>
-            <p><strong>វាយលេខពី​ 000 - 999 អ្នកមានឪកាសឈ្នះ 5$</strong></p>
-            <p><strong>វាយលេខពី ​0000 - 9999 អ្នកមានឪកាសឈ្នះ 50$</strong></p>
-            <img src="{{asset('fronts/img/core-img/smart.png')}}" width="100" alt="">
-            <form action="{{url('/gift')}}" method="get">
-                <div class="row py-2">
-                    <div class="col-md-6"><input type="submit" class="btn btn-success btn-block" value="Smart"></div>
-                    <div class="col-md-6"><input type="text" class="form-control" placeholder="សូមវាយបញ្ជលលេខនៅទីនេះ" name="smart"></div>
-                </div>
-            </form>
-            <img src="{{asset('fronts/img/core-img/cellcard.png')}}" width="100" alt="">
-            <form action="{{url('/gift')}}"  method="get">
-                <div class="row py-2">
-                    <div class="col-md-6"><input type="submit" class="btn btn-warning btn-block text-white" value="Cellcard"></div>
-                    <div class="col-md-6"><input type="text" class="form-control"  placeholder="សូមវាយបញ្ជលលេខនៅទីនេះ"​name="cellcard"></div>
-                </div> 
-            </form>
-            <img src="{{asset('fronts/img/core-img/metfone.png')}}" width="100" alt="">
-            <form action="{{url('/gift')}}" method="get">
-                <div class="row py-2">
-                    <div class="col-md-6"><input type="submit" class="btn btn-info btn-block" value="metfone"></div>
-                    <div class="col-md-6"><input type="text" class="form-control"​ placeholder="សូមវាយបញ្ជលលេខនៅទីនេះ" name="metfone"></div>
-                </div>
-            </form>
         </div>
-    </div>
-</div>
-<div class="featured-post-area">
-    <div class="container">
+      </div>
+    </section>
+
+    <section class="pb_md_py_cover text-center" id="section-home">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-9  order-md-1">
+            <h2 class="heading mb-3" style="color: #ac7951;">Wellcome to Flower Garden Cabin</h2>
+            <p class="sub-heading" style="color: #5c3f29;">The Try Palace Resort & Spa is a charming family owned resort offering a Khmer tranditional peaceful and relaxing atmosphere with excellent services from local staff and facilities. At Try Palace Resort & Spa, we embody the Khmer meaning of hospitality, and we share the spirit with our guests while providing quality and friendly service. This spirit came from the heart, shows in our smiles and is part of our daily life. Weaving together our culture and local lifestyle .
+
+A resort is a place used for relaxation or recreation, attracting visitors for vacations, tourism and/or going swimming in a pool. Resorts are places, towns or sometimes commercial establishment operated by a single company.</p>
+          </div>  
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
+
+    <!-- <section class="pb_section" id="section-gallery">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-10 text-center">
+            <h2 class="mb-4 text-uppercase pb_letter-spacing-2">Gallery</h2>
+          </div>
+        </div>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="section-heading">
-                    <p>វីដេអូថ្មីៗ</p>
-                </div><br>
-                <!-- Single Featured Post -->
-                @foreach($videos as $v)
-                <?php
-                    $khmer_month = ['មករា','កុម្ភៈ',' មីនា','មេសា','ឧសភា','មិថុនា','កក្កដា','សីហា','កញ្ញា','តុលា','វិច្ឆិកា','ធ្នូ'];
-                    $months = date( "m", strtotime($v->create_at));
-                    $day = date( "d", strtotime($v->create_at));
-                    $year = date( "Y", strtotime($v->create_at));
-                    $time = date( "H:i", strtotime($v->create_at));
-                    if($time>12) {
-                        $time = $time.' PM';
-                    } else {
-                        $time = $time.' AM';
-                    }
-                ?>
-               <div class="single-blog-post small-featured-post  shadow-sm p-3  bg-light rounded">
+          <div class="col">
+            <div class="card-columns">
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/1900x1200/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/1900x1200/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_2.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_2.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/1900x1200/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/1900x1200/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/800x975/img_2.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/800x975/img_2.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+              <div class="card border-0 mb-4">
+                <a href="assets/images/restaurant/1900x1200/img_1.jpg" class="pb_hover-zoom image-popup">
+                  <img class="img-fluid" src="assets/images/restaurant/1900x1200/img_1.jpg" alt="Image caption here">
+                  <i class="ion-ios-search-strong icon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- END section -->
+    <section class="pb_section2 bg-light" id="section-events">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-10 text-center">
+            <h2 class="mb-4 text-uppercase pb_letter-spacing-2">THE ESSENCE OF THE RESORT</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card-deck">
+          @foreach($post as $p)
+            <div class="card border-0">
+              <img class="card-img-top" src="{{url('uploads/posts/small/'.$p->featured_image)}}" alt="">
+              <div class="card-body pb_p-40">
+                <h4 class="card-title text-center"><a href="#" class="text-danger">{{$p->title}}</a></h4>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
+
+    <!-- <section class="pb_section pt-0 pb-0" id="section-contact">
+      <div class="d-flex">
+        <div class="pb_half py-5">
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-10 text-center">
+              <h2 class="mb-4 text-uppercase pb_letter-spacing-2">Write us</h2>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-7">
+              <form action="#">
                 <div class="row">
-                    <div class="col-md-5 padding-right-0">
-                        <a href="{{url('/video/detail/'.$v->id)}}">
-                            <img src="{{asset('uploads/videos/small/'.$v->poster_image)}}" alt="">
-                        </a>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control p-3 rounded-0" id="name">
                     </div>
-                        <div class="post-meta col-md-7">
-                        <div class="post-data">
-                        <a href="{{url('/video/detail/'.$v->id)}}" class="post-catagory">{{$v->title}}</a>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control p-3 rounded-0" id="email">
                     </div>
-                            <a href="{{url('/video/detail/'.$v->id)}}" class="post-title">
-                                <h6>{!!$v->short_description!!}</h6>
-                            </a>
-                            <small>{{$time}} - ថ្ងៃទី {{$day}} ខែ {{$khmer_month[(int)$months-1]}} ឆ្នាំ {{$year}}</small>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <br>
-                @endforeach
-                <br>
-                <div class="col-md-12 mb-5">
-                    <a href="{{url('video')}}" class="btn btn-primary btn-sm float-right">ព័ត៌មានវីដេអូ /  អានបន្តែម <i class="fa fa-arrow-right"></i></a>
+                
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea cols="30" rows="10" class="form-control  p-3 rounded-0" id="message"></textarea>
                 </div>
-            </div>      
-            <?php 
-                $i = 1;
-                $categories = DB::table('categories')->where('active', 1)->orderBy('order', 'asc')->get();
-            ?>
-            <div class="col-12 col-md-6 col-lg-6">
-                    @foreach($categories as $c)
-                    @if($c->id !== 6 && $c->id !== 5)
-                    <div class="section-heading{{$i++}}">
-                        <p>{{$c->name}}</p>
-                    </div><br>  
-                    @endif
-                    <?php $posts = DB::table('posts')->where('active',1)->where('category_id', $c->id)->orderBy('id', 'desc')->limit('5')->get(); ?>
-                    @foreach($posts as $p)
-                            <?php
-                            $khmer_month = ['មករា','កុម្ភៈ',' មីនា','មេសា','ឧសភា','មិថុនា','កក្កដា','សីហា','កញ្ញា','តុលា','វិច្ឆិកា','ធ្នូ'];
-                            $months = date( "m", strtotime($p->create_at));
-                            $day = date( "d", strtotime($p->create_at));
-                            $year = date( "Y", strtotime($p->create_at));
-                            $time = date( "H:i", strtotime($p->create_at));
-                            if($time>12) {
-                                $time = $time.' PM';
-                            } else {
-                                $time = $time.' AM';
-                            }
-                        ?>
-                    <div class="single-blog-post small-featured-post  shadow-sm p-3  bg-light rounded">
-                        <div class="row">
-                                <div class="post-meta col-md-7">
-                                    <div class="post-data">
-                                        <a href="{{url('post/detail/'.$p->id)}}" class="post-catagory">{{$p->title}}</a>
-                                    </div>
-                                        <a href="{{url('post/detail/'.$p->id)}}" class="post-title">
-                                            <h6>{{$p->short_description}}</h6>
-                                        </a>
-                                        <small>{{$time}} - ថ្ងៃទី {{$day}} ខែ {{$khmer_month[(int)$months-1]}} ឆ្នាំ {{$year}}</small>
-                                    </div>
-                                    <div class="col-md-5 padding-left-0">
-                                        <a href="{{url('post/detail/'.$p->id)}}">
-                                            <img src="{{asset('uploads/posts/small/'.$p->featured_image)}}" alt="">
-                                       </a>
-                                    </div>
-                                </div>
-                        </div>
-                        <br>
-                    @endforeach
-                    @if($c->id !== 6 && $c->id !== 5)
-                    <br>
-                    <div class="col-md-12 mb-5">
-                        <a href="{{url('post/category/'.$c->id)}}" class="btn btn-primary btn-sm float-right"> {{$c->name}} / អានបន្តែម <i class="fa fa-arrow-right"></i></a>
-                    </div>
-                    @endif
-                    @endforeach
+                <div class="form-group">
+                  <input type="submit" class="btn pb_outline-dark pb_font-13 pb_letter-spacing-2  p-3 rounded-0" value="Send Message">
                 </div>
+              </form>
             </div>
+          </div>
         </div>
-    </div>
-</div>
- @endsection
-   
+      </div>
+      
+    </section> -->
+    <!-- END section -->
+    @endsection

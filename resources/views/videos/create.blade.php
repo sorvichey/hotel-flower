@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-9 col-sm-9">
             <div class="card">
                 <div class="card-header text-bold">
-                    <i class="fa fa-align-justify"></i> New Video &nbsp;&nbsp;
-                    <a href="{{url('/admin/video')}}" class="btn btn-link btn-sm">Back To List</a>
+                    <i class="fa fa-align-justify"></i> New Video&nbsp;&nbsp;
+                    <a href="{{url('/admin/post')}}" class="btn btn-link btn-sm">Back To List</a>
                 </div>
                 <div class="card-block">
                     @if(Session::has('sms'))
@@ -28,60 +28,48 @@
                             </div>
                         </div>
                     @endif
-
                     <form 
-                        action="{{url('/admin/video/save')}}" 
-                        class="form-horizontal" 
+                    	action="{{url('/admin/video/save')}}" 
+                    	class="form-horizontal" 
                         method="post"
-                        enctype="multipart/form-data"  
+                        enctype="multipart/form-data"
                     >
                         {{csrf_field()}}
-                        <div class="form-group row">
-                            <label for="title" class="control-label col-lg-2 col-sm-2">Title <span class="text-danger">*</span></label>
-                            <div class="col-lg-6 col-sm-8">
-                                <input type="title" name="title" id="title" required class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="short_description" class="control-label col-lg-2 col-sm-2">Short Description <span class="text-danger">*</span></label>
-                            <div class="col-lg-6 col-sm-8">
-                                <textarea name="short_description" id="short_description" class="form-control"  rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="url" class="control-label col-lg-2 col-sm-2">URL <span class="text-danger">*</span></label>
-                            <div class="col-lg-6 col-sm-8">
-                                <input type="text" name="url" id="url" required class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="image" class="control-label col-lg-2 col-sm-2">Poster Image <span class="text-danger">(750x500)</span></label>
-                            <div class="col-lg-6 col-sm-8">
-                                <input type="file" name="image" id="image" accept="image/*" onchange="loadFile(event)">
-                                <img src="" width="120" id="img" alt="">
+                        <div class="form-group">
+                            <div class="col-lg-12 col-sm-12">
+                                <label for="titile">Title  <span class="text-danger">*</span></label>
+                                <input type="text" required autofoucus name="title" id="title" class="form-control" placeholder="Enter title here">
                             </div>
                         </div>
                         <div class="form-group">
-                             <div class="row">
-                            <div class="col-lg-8 col-sm-8">
+                            <div class="col-lg-12 col-sm-12">
+                                <label for="link">Link Embed Youtube  <span class="text-danger">*</span></label>
+                                <input type="text" required  name="url" id="url" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 col-sm-12">
                                 <textarea name="description" id="description" rows="6" class="form-control ckeditor" style="width:100%;">
                                 </textarea>
                             </div>
-                            </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="control-label col-lg-2 col-sm-2">&nbsp;</label>
-                            <div class="col-lg-6 col-sm-8">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-danger" type="reset">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Featured Image <span class="text-danger">( 750 x 500 )</span>
+                </div>
+               
+                <div class="card-block">
+                    <button class="btn btn-primary" type="submit">Publish</button>
+                </div>
+            </div>
+            </form>
+        </div>
     </div>
-    <style>
+<style>
 .cke_contents {
   max-height: 800px;
   height: 800px !important;
@@ -94,7 +82,7 @@
         output.src = URL.createObjectURL(e.target.files[0]);
     }
 </script>
-<script src="{{asset('js/ckeditor2/ckeditor.js')}}"></script>
+<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script type="text/javascript">
    var roxyFileman = "{{asset('fileman/index.html?integration=ckeditor')}}"; 
 
@@ -102,4 +90,5 @@
                                filebrowserImageBrowseUrl:roxyFileman+'&type=image',
                                removeDialogTabs: 'link:upload;image:upload'});                  
 </script> 
+
 @endsection

@@ -1,145 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    @if($video != null)
-    <meta name="description" content="{{$video->title}}">
-    <link rel="image_src" href="{{asset('uploads/videos/'.$video->poster_image)}}" width="100%" >
-    @elseif($post != null)
-    <meta name="description" content="{{$post->title}}">
-    <link rel="image_src" href="{{asset('uploads/posts/'.$post->featured_image)}}" width="100%" >
-    @else 
-    <meta name="description" content="Soben 24 News">
-    <link rel="image_src" href="{{asset('fronts/img/core-img/logo.png')}}" width="100%" >
-    @endif
-    <meta name="author" content="Sor Vichey">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Soben 24 News</title>
-    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <title>Flower Garden Cabin</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Flower Garden Cabin This isn't your grandparents log cabin up in the mountains. Flower Garden Cabin is right near Kep's ocean.
+              Air-con, Cable TV, hot water shower, fridge, free Wi-Fi. Quiet location a few minutes drive to the Kep Crab Market.">
+    <meta name="keywords" content="flower garden cabin, flower garden hotel, flower hotel, hotel flower,hotel in cambodia">
+    <meta property="og:title" content="Flower Garden Cabin, Kep, Cambodia" />
+    <meta property="og:description" content="Flower Garden Cabin Located 12 km from Kep Market and 15 km from Crab Market, Flower Garden Cabin provides accommodation situated in Kep." />
+    
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400, 600, 700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('fronts/css/bootstrap/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('fronts/fonts/ionicons/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fronts/css/magnific-popup.css')}}">
+
+    <link rel="stylesheet" href="{{asset('fronts/fonts/fontawesome/css/font-awesome.min.css')}}">
+    
+    
+    <link rel="stylesheet" href="{{asset('fronts/css/slick.css')}}">
+
+    <link rel="stylesheet" href="{{asset('fronts/css/helpers.css')}}">
     <link rel="stylesheet" href="{{asset('fronts/css/style.css')}}">
-</head>
-<body>
-    <?php 
-        $menus = DB::table('categories')->where('active', 1)->orderBy('order', 'asc')->get();
-    ?>
-    <header class="header-area">
-        <div class="top-header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top-header-content d-flex align-items-center justify-content-between">
-                            <div class="logo">
-                                <a href="{{url('/')}}"><img src="{{asset('fronts/img/core-img/logo.png')}}" width="80" alt=""></a>
-                            </div>
-                            <div>
-                            @if($advertisement !== null) 
-                                <a href="{{$advertisement->url}}" target="_blank">
-                                    <img src="{{asset('uploads/advertisements/'.$advertisement->photo)}}" alt="">
-                                </a>
-                            @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <link rel="stylesheet" href="{{asset('fronts/css/restaurant.css')}}">
+  </head>
+  <body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+  <div class="probootstrap-loader"></div>
+    <!-- END loader -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
+      <div class="container">
+        <a class="navbar-brand d-xl-none d-lg-none d-md-block d-sm-block" href="/">
+          <img src="{{asset('fronts/images/logo.png')}}" alt="Instant Logo" class="light">
+          <img src="{{asset('fronts/images/logo.png')}}" alt="Instant Logo" class="dark">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-navbar" aria-controls="probootstrap-navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span><i class="ion-navicon"></i></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-md-center" id="probootstrap-navbar">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link " href="#section-home">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="#section-about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section-menu">Menu</a></li>
+            <li class="nav-item logo-center d-xl-block d-lg-block d-md-none d-sm-none d-none">
+              <a class="nav-link text-uppercase pb_letter-spacing-2" href="index.html">
+                <img src="{{asset('fronts/images/logo.png')}}"width="150" alt="Instant Logo" class="light">
+              <img src="{{asset('fronts/images/logo.png')}}"  alt="Instant Logo" class="dark">
+              </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#section-gallery">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link  " href="#section-events">Events</a></li>
+            <li class="nav-item"><a class="nav-link " href="#section-contact">Contact</a></li>
+          </ul>
         </div>
-      
-        <div class="newspaper-main-menu" id="stickyMenu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <nav class="classy-navbar justify-content-between" id="newspaperNav">
-                        <div class="logo">
-                            <a href="{{url('/')}}"><img src="{{asset('fronts/img/core-img/logo.png')}}" width="50" alt=""></a>
-                        </div>
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-                        <div class="classy-menu">
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="{{url('/')}}"><i class="fa fa-home"></i> ទំព័រមុខ</a></li>
-									<li><a href="{{url('/video')}}"><i class="fa fa-youtube"></i> វីដេអូថ្មីៗ</a></li>
-                                    @foreach($menus as $c)
-                                        @if($c->id !== 6 && $c->id !== 5)
-                                        <li><a href="{{url('post/category/'.$c->id)}}">{{$c->name}}</a></li>
-                                        @endif
-									@endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+      </div>
+    </nav>
+    <!-- END nav -->
+    
+  @yield('content')
+    
+    <?php $socials = DB::table('socials')->where('active', 1)->orderBy('order', 'asc')->get();?>
+    <footer class="pb_footer" role="contentinfo">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <ul class="list-inline">
+                @foreach($socials as $s)
+              <li class="list-inline-item"><a href="{{$s->url}}" target="_blank" class="p-2"><img src="{{URL::asset($s->icon)}}" alt=""></a></li>
+              @endforeach
+            </ul>
+          </div>
         </div>
-    </header>
-	@yield('content')
-    <footer class="footer-area">
-        <div class="main-footer-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-2">
-                        <div class="footer-widget-area mt-30">
-                            <div class="footer-logo">
-                                <a href="{{url('/')}}"><img src="{{asset('fronts/img/core-img/logo.png')}}" width="80" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-3 col-lg-3">
-                        <div class="footer-widget-area mt-30">
-                            <ul class="list">
-                                <li><a href="mailto:contact@youremail.com">អុីម៉ែល៖ info@akponline.com</a></li>
-                                <li><a href="tel:+4352782883884">លេខទូរស័ព្ទ៖ ​+43 5278 2883 884</a></li>
-                                <li><a href="http://yoursitename.com">អាសយដ្ឋាន៖ ​www.akp.gov.kh</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-2 col-lg-2">
-                        <div class="footer-widget-area mt-30">
-                            <h6 class="widget-title text-white">ជួបគ្នានៅបណ្តាញសង្គម</h6>
-                            <a href="#"> <span class="social">  <i class="fa fa-facebook  fa-3x text-primary"></i></span></a>
-                            <a href="#"> <span class="social">  <i class="fa fa-youtube fa-3x text-danger"></i></span></a>
-                        </div>
-                    </div> 
-                </div>
-            </div>
+        <div class="row">
+          <div class="col text-center">
+            <a href="#" style="color:#fff;">​​ Meet on social Media</a>
+          </div>
         </div>
-        <div class="bottom-footer-area">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12 ">
-                     
-                        <p class="text-white">
-                            &copy; រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង​ដោយ​ ទីភ្នាក់ងារសារព័ត៌មានជាតិកម្ពុជា ឆ្នាំ​២០១៨  
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </footer>
-    <script src="{{asset('fronts/js/jquery/jquery-2.2.4.min.js')}}"></script>
-    <script src="{{asset('fronts/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{asset('fronts/js/plugins/plugins.js')}}"></script>
-    <script src="{{asset('fronts/js/active.js')}}"></script>
-    <script src="{{asset('fronts/js/jscroll-master/dist/jquery.jscroll.min.js')}}"></script>
-    <script type="text/javascript">
-        $('ul.pagination').hide();
-        $(function() {
-            $('.infinite-scroll').jscroll({
-                autoTrigger: true,
-                loadingHtml: '<img class="center-block" src="{{asset('fronts/img/loading.gif')}}" alt="Loading..." />',
-                padding: 0,
-                nextSelector: '.pagination li.active + li a',
-                contentSelector: 'div.infinite-scroll',
-                callback: function() {
-                    $('ul.pagination').remove();
-                }
-            });
-        });
-    </script>
-</body>
+
+    <!-- loader -->
+    <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#FDA04F"/></svg></div>
+    
+
+    <script src="{{asset('fronts/js/jquery.min.js')}}"></script>
+    
+    <script src="{{asset('fronts/js/popper.min.js')}}"></script>
+    <script src="{{asset('fronts/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('fronts/js/slick.min.js')}}"></script>
+    <script src="{{asset('fronts/js/jquery.mb.YTPlayer.min.js')}}"></script>
+
+    <script src="{{asset('fronts/js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('fronts/js/jquery.easing.1.3.js')}}"></script>
+    
+    <script src="{{asset('fronts/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('fronts/js/magnific-popup-options.js')}}"></script>
+  
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+
+    <script src="{{asset('fronts/js/main.js')}}"></script>
+    
+  </body>
 </html>

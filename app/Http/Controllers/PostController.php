@@ -5,12 +5,19 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Auth;
+use Datetime;
 use Intervention\Image\ImageManagerStatic as Image;
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (Auth::user()==null)
+            {
+                return redirect("/login");
+            }
+            return $next($request);
+        });
     }
     // index
     public function index()
@@ -20,25 +27,35 @@ class PostController extends Controller
             return view('permissions.no');
         }
         $data['query']= "";
+        $data['posts'] = null;
         if(isset($_GET['q']))
         {
             $data['query'] = $_GET['q'];
-            $data['posts'] = DB::table('posts')
-                ->join('categories', 'posts.category_id', 'categories.id')
-                ->where('posts.active', 1)
+            $query = DB::table('posts')
+                ->where('posts.active', 1);
+                if(Auth::user()->role_id>1)
+                {
+                    $query = $query->where('post_by', Auth::user()->id);
+                }
+            $query = $query->orderBy('posts.pin', 1)
                 ->orderBy('posts.id', 'desc')
                 ->where(function($fn){
                     $fn->where('posts.title', 'like', "%{$_GET['q']}%");
+                    $fn->orWhere('posts.description', 'like', "%{$_GET['q']}%");
                 })
                 ->paginate(200);
+            $data['posts'] =$query;
         }
         else{
-            $data['posts'] = DB::table('posts')
-                ->join('categories', 'posts.category_id', 'categories.id')
-                ->where('posts.active', 1)
-                ->orderBy('posts.id', 'desc')
-                ->select('posts.*', 'categories.name')
+            $query = DB::table('posts')
+                ->where('posts.active', 1);
+                if(Auth::user()->role_id>1)
+                {
+                    $query = $query->where('post_by', Auth::user()->id);
+                }
+               $query = $query->orderBy('posts.id', 'desc')
                 ->paginate(18);
+            $data['posts'] = $query;
         }
         
         return view('posts.index', $data);
@@ -50,14 +67,9 @@ class PostController extends Controller
         {
             return view('permissions.no');
         }
-        $data['categories'] = DB::table('categories')
-            ->where('id', '!=', 5)
-            ->where('id', '!=', 6)
-            ->where('active', 1)
-            ->orderBy('name')
-            ->get();
-        return view('posts.create' , $data);
+        return view('posts.create');
     }
+
     // save new page
     public function save(Request $r)
     {
@@ -67,22 +79,22 @@ class PostController extends Controller
         }
         $data = array(
             'title' => $r->title,
-            'short_description' => $r->short_description,
-            'description' => $r->description,
-            'category_id' => $r->category
+            'description' => $r->description
         );
+        $date = new Datetime('now');
+        $get_date_time = $date->format('d-m-Y').'-'.$date->format('H-i-s');
         $i = DB::table('posts')->insertGetId($data);
+        
         if($i)
         {
-            if($r->feature_image) {
-
+            if($r->feature_image !== null) {
                 $file = $r->file('feature_image');
                 $file_name = $file->getClientOriginalName();
                 $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
-                $file_name = 'post' .$i . $ss;
+                $file_name = 'hotel-'.$get_date_time.'-'.$i.$ss;
                 
                 $destinationPath = 'uploads/posts/small/';
-                $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $new_img = Image::make($file->getRealPath())->resize(500, null, function ($con) {
                     $con->aspectRatio();
                 });
                 $destinationPath2 = 'uploads/posts/';
@@ -95,7 +107,7 @@ class PostController extends Controller
                 DB::table('posts')->where('id', $i)->update(['featured_image'=>$file_name]);
             }
             $r->session()->flash('sms', 'New post has been created successfully!');
-            return redirect('/admin/post/create');
+            return redirect('/admin/post/edit/'.$i);
         }
         else{
             $r->session()->flash('sms1', 'Fail to create new post. Please check your input again!');
@@ -126,12 +138,7 @@ class PostController extends Controller
         }
         $data['post'] = DB::table('posts')
             ->where('id',$id)->first();
-        $data['categories'] = DB::table('categories')
-            ->where('id', '!=', 5)
-            ->where('id', '!=', 6)
-            ->where('active', 1)
-            ->orderBy('name')
-            ->get();
+
         return view('posts.edit', $data);
     }
 
@@ -143,18 +150,18 @@ class PostController extends Controller
         }
         $data = array(
             'title' => $r->title,
-            'short_description' => $r->short_description,
-            'description' => $r->description,
-            'category_id' => $r->category
+            'description' => $r->description
         );
+        $date = new Datetime('now');
+        $get_date_time = $date->format('d-m-Y').'-'.$date->format('H-i-s');
+
         if($r->feature_image) {
-           
             $file = $r->file('feature_image');
             $file_name = $file->getClientOriginalName();
             $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
-            $file_name = 'post' .$r->id . $ss;
+            $file_name = 'hotel-'.$get_date_time.'-'.$r->id.$ss;
             $destinationPath = 'uploads/posts/small/';
-            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+            $new_img = Image::make($file->getRealPath())->resize(500, null, function ($con) {
                 $con->aspectRatio();
             });
             $destinationPath2 = 'uploads/posts/';
@@ -163,7 +170,7 @@ class PostController extends Controller
             });
             $new_img2->save($destinationPath2 . $file_name, 80);
             $new_img->save($destinationPath . $file_name, 80);
-  
+
             $data['featured_image'] =  $file_name;
         }
         $i = DB::table('posts')->where('id', $r->id)->update($data);
@@ -179,17 +186,6 @@ class PostController extends Controller
             $r->session()->flash('sms1', $sms1);
             return redirect('/admin/post/edit/'.$r->id);
         }
-    }
-    // view detail
-    public function view($id) 
-    {
-        if(!Right::check('Post', 'l'))
-        {
-            return view('permissions.no');
-        }
-        $data['post'] = DB::table('posts')
-            ->where('id',$id)->first();
-        return view('posts.detail', $data);
     }
 }
 

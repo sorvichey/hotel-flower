@@ -23,8 +23,7 @@
                         <thead>
                             <tr>
                                 <th>&numero;</th>
-                                <th>Featured Image</th>
-                                <th>URL</th>
+                                <th>Link Embed Youtube</th>
                                 <th>Title</th>
                                 <th>Action</th>
                             </tr>
@@ -39,13 +38,11 @@
                             @foreach($videos as $vid)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td><img src="{{asset('uploads/videos/'.$vid->poster_image)}}" alt="" width='50'></td>
-                                    
                                     <td>
-                                        {{$vid->url}}
+                                    <iframe width="270" height="170" src="{{$vid->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </td>
                                     <td>
-                                        <a href="{{url('admin/video/detail/'.$vid->id)}}">{{$vid->title}}</a>
+                                        <a href="{{url('admin/video/edit/'.$vid->id)}}">{{$vid->title}}</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-xs btn-info"  href="{{url('/admin/video/edit/'.$vid->id)}}" title="Edit"><i class="fa fa-pencil"></i></a>

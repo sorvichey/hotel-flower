@@ -43,12 +43,6 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-12 col-sm-12">
-                                <label for="titile">Short Description  <span class="text-danger">*</span></label>
-                                <textarea name="short_description" id="" rows="3" class="form-control" required></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-12 col-sm-12">
                                 <textarea name="description" id="description" rows="6" class="form-control ckeditor" style="width:100%;">
                                 </textarea>
                             </div>
@@ -56,20 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 col-lg-3">
-           <div class="card">
-               <div class="card-header">
-                   Category
-               </div>
-               <div class="card-block">
-                   <select name="category" id="category" class="form-control">
-                       @foreach($categories as $c)
-                       <option value="{{$c->id}}">{{$c->name}}</option>
-                       @endforeach
-                   </select>
-               </div>
-                  
-           </div>
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
                     Featured Image <span class="text-danger">( 750 x 500 )</span>

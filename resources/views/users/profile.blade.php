@@ -48,15 +48,7 @@
                                            name="email" id="email" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="language" class="control-label col-lg-1 col-sm-2">{{$lb_language}}</label>
-                                <div class="col-lg-6 col-sm-6">
-                                    <select name="language" id="language" class="form-control" disabled>
-                                        <option value="kh" {{$user->language=='kh'?'selected':''}}>ខ្មែរ</option>
-                                        <option value="en" {{$user->language=='en'?'selected':''}}>English</option>
-                                    </select>
-                                </div>
-                            </div>
+                           
                             <div class="form-group row">
                                 <label for="role" class="control-label col-lg-1 col-sm-2">{{$lb_role}}</label>
                                 <div class="col-lg-6 col-sm-6">

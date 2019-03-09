@@ -60,30 +60,10 @@ class VideoController extends Controller
         $data = array(
             'url' => $r->url,
             'title' => $r->title,
-            'short_description' => $r->short_description,
             'description' => $r->description
         );
-        $i = DB::table('videos')->insertGetId($data);
+        $i = DB::table('videos')->insert($data);
 
-        if($r->hasFile('image')) {
-            $file = $r->file('image');
-            $file_name = $file->getClientOriginalName();
-            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
-            $file_name = 'video' .$i . $ss;
-            
-            $destinationPath = 'uploads/videos/small/';
-            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
-                $con->aspectRatio();
-            });
-            $destinationPath2 = 'uploads/videos/';
-            $new_img2 = Image::make($file->getRealPath())->resize(750, null, function ($con) {
-                $con->aspectRatio();
-            });
-            $new_img2->save($destinationPath2 . $file_name, 80);
-            $new_img->save($destinationPath . $file_name, 80);
-            $data['poster_image'] = $file_name;
-            $i = DB::table('videos')->where('id', $i)->update($data);
-        }
         if ($i) {
             $r->session()->flash("sms", "New video has been created successfully!");
             return redirect("/admin/video/create");
@@ -140,28 +120,9 @@ class VideoController extends Controller
     	$data = array(
             'url' => $r->url,
             'title' => $r->title,
-            'short_description' => $r->short_description,
             'description' => $r->description
         );
-        if ($r->image) {
-            $file = $r->file('image');
-            $file_name = $file->getClientOriginalName();
-            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
-            $file_name = 'video' .$r->id . $ss;
-
-            $destinationPath = 'uploads/videos/small/';
-            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
-                $con->aspectRatio();
-            });
-            $destinationPath2 = 'uploads/videos/';
-            $new_img2 = Image::make($file->getRealPath())->resize(750, null, function ($con) {
-                $con->aspectRatio();
-            });
-            $new_img2->save($destinationPath2 . $file_name, 80);
-            $new_img->save($destinationPath . $file_name, 80);
-            $data['poster_image'] = $file_name;
-            // dd($new_img2->save($destinationPath2 . $file_name, 80));
-        }
+       
         $sms = "All changes have been saved successfully.";
         $sms1 = "Fail to to save changes, please check again!";
         $i = DB::table('videos')->where('id', $r->id)->update($data);

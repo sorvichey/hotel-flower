@@ -5,7 +5,6 @@ Route::get('/',"FrontController@index");
 Route::get('/page/{id}', "FrontPageController@index");
 Route::get('/post/category/{id}', "FrontController@category");
 Route::get('/post/video', "FrontController@video");
-Route::get('/gift', "FrontController@gift");
 Route::get('/post/detail/{id}', "FrontController@detail");
 Route::get('/video/detail/{id}', "FrontController@video_detail");
 Route::get('/post/{id}', "FrontController@post");
@@ -18,21 +17,7 @@ Route::get('/admin',"HomeController@index");
 Route::get('/admin/dashboard',"HomeController@index");
 
 // load file manager
-Route::get('/fm', "FileManagerController@index");
-// advertisement
-Route::get('/admin/advertisement', "AdvertisementController@index");
-Route::get('/admin/advertisement/create', "AdvertisementController@create");
-Route::post('/admin/advertisement/save', "AdvertisementController@save");
-Route::get('/admin/advertisement/delete/{id}', "AdvertisementController@delete");
-Route::get('/admin/advertisement/edit/{id}', "AdvertisementController@edit");
-Route::post('/admin/advertisement/update', "AdvertisementController@update");
-// gitf 
-Route::get('/admin/gift', "GiftController@index");
-Route::get('/admin/gift/create', "GiftController@create");
-Route::post('/admin/gift/save', "GiftController@save");
-Route::get('/admin/gift/delete/{id}', "GiftController@delete");
-Route::get('/admin/gift/edit/{id}', "GiftController@edit");
-Route::post('/admin/gift/update', "GiftController@update");
+
 // Post
 Route::get('/admin/post', "PostController@index");
 Route::get('/admin/post/create', "PostController@create");
@@ -43,14 +28,36 @@ Route::get('/admin/post/edit/{id}', "PostController@edit");
 Route::post('/admin/post/update', "PostController@update");
 Route::get('/admin/post/view/{id}', "PostController@view");
 
+// Page
+Route::get('/admin/page', "PageController@index");
+Route::get('/admin/page/create', "PageController@create");
+Route::post('/admin/page/save', "PageController@save");
+Route::get('/admin/page/delete/{id}', "PageController@delete");
+Route::get('/admin/page/edit/{id}', "PageController@edit");
+Route::post('/admin/page/update', "PageController@update");
+Route::get('/admin/page/view/{id}', "PageController@view");
 
-// catogory
-Route::get('/admin/category', "CategoryController@index");
-Route::get('/admin/category/create', "CategoryController@create");
-Route::get('/admin/category/edit/{id}', "CategoryController@edit");
-Route::get('/admin/category/delete/{id}', "CategoryController@delete");
-Route::post('/admin/category/save', "CategoryController@save");
-Route::post('/admin/category/update', "CategoryController@update");
+
+
+// slide show
+Route::get('/admin/slide', "SlideController@index");
+Route::get('/admin/slide/create', "SlideController@create");
+Route::post('/admin/slide/save', "SlideController@save");
+Route::get('/admin/slide/edit/{id}', "SlideController@edit");
+Route::post('/admin/slide/update', "SlideController@update");
+Route::get('/admin/slide/delete/{id}', "SlideController@delete");
+
+// page slide show
+Route::post('/admin/page-slide/save', "PageSlideController@save");
+Route::get('/admin/page-slide/edit/{id}', "PageSlideController@edit");
+Route::post('/admin/page-slide/update', "PageSlideController@update");
+Route::get('/admin/page-slide/delete/{id}', "PageSlideController@delete");
+
+// page slide show
+Route::post('/admin/gallery/save', "GalleryController@save");
+Route::get('/admin/gallery/edit/{id}', "GalleryController@edit");
+Route::post('/admin/gallery/update', "GalleryController@update");
+Route::get('/admin/gallery/delete/{id}', "GalleryController@delete");
 
 // user route
 Route::get('/user', "UserController@index");
@@ -87,3 +94,11 @@ Route::get('/admin/video/edit/{id}', "VideoController@edit");
 Route::get('/admin/video/detail/{id}', "VideoController@detail");
 Route::post('/admin/video/update', "VideoController@update");
 Route::get('/admin/video/delete/{id}', "VideoController@delete");
+
+// social
+Route::get('/admin/social', "SocialController@index");
+Route::get('/admin/social/create', "SocialController@create");
+Route::get('/admin/social/edit/{id}', "SocialController@edit");
+Route::get('/admin/social/delete/{id}', "SocialController@delete");
+Route::post('/admin/social/save', "SocialController@save");
+Route::post('/admin/social/update', "SocialController@update");
