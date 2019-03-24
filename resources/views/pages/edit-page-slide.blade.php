@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header text-bold">
                     <i class="fa fa-align-justify"></i> Edit Page Slide&nbsp;&nbsp;
-                    <a href="{{url('/admin/page/view/'.$gallery->page_id)}}" class="btn btn-link btn-sm">Back To List</a>
+                    <a href="{{url('/admin/page/view/'.$page_slide->page_id)}}" class="btn btn-link btn-sm">Back To List</a>
                 </div>
                 <div class="card-block">
                     @if(Session::has('sms'))

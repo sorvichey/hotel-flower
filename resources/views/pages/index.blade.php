@@ -9,14 +9,13 @@
                         New
                     </a>
                 </div>
-                <div class="card-block">
-
+                <div class="card-block" style="padding: 0;">
+<br>
                     <table class="tbl">
                         <thead>
                             <tr>
                                 <th>&numero;</th>
                                 <th>Title</th>
-                                <th>URL</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,8 +25,6 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td><a href="{{url('/admin/page/view/'.$pag->id)}}" title="Detail">{{$pag->title}}</a></td>
-                                    <td>/page/{{$pag->id}}</td>
-                                    
                                     <td>
                                         <a class="btn btn-xs btn-primary" href="{{url('/admin/page/view/'.$pag->id)}}" title="Detail"><i class="fa fa-eye"></i></a>
                                         <a class="btn btn-xs btn-info" href="{{url('/admin/page/edit/'.$pag->id)}}" title="Edit"><i class="fa fa-pencil"></i></a>

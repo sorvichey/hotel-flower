@@ -6,24 +6,22 @@
 
     <title>Flower Garden Cabin</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Flower Garden Cabin This isn't your grandparents log cabin up in the mountains. Flower Garden Cabin is right near Kep's ocean.
-              Air-con, Cable TV, hot water shower, fridge, free Wi-Fi. Quiet location a few minutes drive to the Kep Crab Market.">
+    <meta name="description" content="Flower Garden Cabin was designed in style of a modern beach cabin with three types of room set - Single Room Luxury, double room family and single room">
+    <link rel="image_src" href="{{asset('fronts/images/flower-garden-cabin.jpg')}}" width="100%" >
+   
+    <link rel="icon" href="{{asset('fronts/images/favicon.png')}}">
     <meta name="keywords" content="flower garden cabin, flower garden hotel, flower hotel, hotel flower,hotel in cambodia">
-    <meta property="og:title" content="Flower Garden Cabin, Kep, Cambodia" />
+    <meta property="og:title" content="Flower Garden Cabin, Kep, Cambodia, " />
     <meta property="og:description" content="Flower Garden Cabin Located 12 km from Kep Market and 15 km from Crab Market, Flower Garden Cabin provides accommodation situated in Kep." />
-    
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400, 600, 700" rel="stylesheet">
-
+    <link href="{{url('fronts/css/font.css')}}" rel="stylesheet">
+    <meta property='og:url' content='http://www.flowergardencabin.com/'/>
+    <meta property='og:site_name' content='Flower Gerden Cabin'/>
+    <meta property='og:type' content='website'/>
+    <meta property="og:image" content="{{asset('fronts/images/flower-garden-cabin.jpg')}}" />
     <link rel="stylesheet" href="{{asset('fronts/css/bootstrap/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{asset('fronts/fonts/ionicons/css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('fronts/css/magnific-popup.css')}}">
-
     <link rel="stylesheet" href="{{asset('fronts/fonts/fontawesome/css/font-awesome.min.css')}}">
-    
-    
     <link rel="stylesheet" href="{{asset('fronts/css/slick.css')}}">
-
-    <link rel="stylesheet" href="{{asset('fronts/css/helpers.css')}}">
     <link rel="stylesheet" href="{{asset('fronts/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('fronts/css/restaurant.css')}}">
   </head>
@@ -38,22 +36,22 @@
           <img src="{{asset('fronts/images/logo.png')}}" alt="Instant Logo" class="dark">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-navbar" aria-controls="probootstrap-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span><i class="ion-navicon"></i></span>
+          <span><i class="fa fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse justify-content-md-center" id="probootstrap-navbar">
           <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link " href="#section-home">Home</a></li>
-            <li class="nav-item"><a class="nav-link " href="#section-about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#section-menu">Menu</a></li>
+            <li class="nav-item"><a class="nav-link " href="{{url('/')}}">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="{{url('promotion')}}">Promotion</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{url('room')}}">Room</a></li>
             <li class="nav-item logo-center d-xl-block d-lg-block d-md-none d-sm-none d-none">
-              <a class="nav-link text-uppercase pb_letter-spacing-2" href="index.html">
+              <a class="nav-link text-uppercase pb_letter-spacing-2" href="{{url('/')}}">
                 <img src="{{asset('fronts/images/logo.png')}}"width="150" alt="Instant Logo" class="light">
               <img src="{{asset('fronts/images/logo.png')}}"  alt="Instant Logo" class="dark">
               </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#section-gallery">Gallery</a></li>
-            <li class="nav-item"><a class="nav-link  " href="#section-events">Events</a></li>
-            <li class="nav-item"><a class="nav-link " href="#section-contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{url('page/3')}}">Dinning</a></li>
+            <li class="nav-item"><a class="nav-link  " href="{{url('page/2')}}">The Spa</a></li>
+            <li class="nav-item"><a class="nav-link " href="{{url('page/1')}}">Contact Us</a></li>
           </ul>
         </div>
       </div>
@@ -61,7 +59,6 @@
     <!-- END nav -->
     
   @yield('content')
-    
     <?php $socials = DB::table('socials')->where('active', 1)->orderBy('order', 'asc')->get();?>
     <footer class="pb_footer" role="contentinfo">
       <div class="container">
@@ -98,10 +95,6 @@
     
     <script src="{{asset('fronts/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('fronts/js/magnific-popup-options.js')}}"></script>
-  
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-
     <script src="{{asset('fronts/js/main.js')}}"></script>
     
   </body>

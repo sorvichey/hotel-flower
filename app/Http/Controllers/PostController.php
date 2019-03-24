@@ -37,8 +37,7 @@ class PostController extends Controller
                 {
                     $query = $query->where('post_by', Auth::user()->id);
                 }
-            $query = $query->orderBy('posts.pin', 1)
-                ->orderBy('posts.id', 'desc')
+            $query = $query->orderBy('posts.id', 'desc')
                 ->where(function($fn){
                     $fn->where('posts.title', 'like', "%{$_GET['q']}%");
                     $fn->orWhere('posts.description', 'like', "%{$_GET['q']}%");
@@ -140,6 +139,18 @@ class PostController extends Controller
             ->where('id',$id)->first();
 
         return view('posts.edit', $data);
+    }
+
+    public function view($id)
+    {
+        if(!Right::check('Post', 'l'))
+        {
+            return view('permissions.no');
+        }
+        $data['post'] = DB::table('posts')
+            ->where('id',$id)->first();
+
+        return view('posts.detail', $data);
     }
 
     public function update(Request $r)

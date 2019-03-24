@@ -7,11 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="School Management System">
+    <meta name="description" content="Hotel Website">
     <meta name="author" content="vdoo.biz">
     <meta name="keyword" content="ngo, website ngo, company create website, website">
     <link rel="shortcut icon" href="img/favicon.png">
-    <title>News</title>
+    <title>Flower Garden Cabin</title>
 
      <!-- Chosen  -->
     <link rel="stylesheet" href="{{asset('chosen/chosen.css')}}">
@@ -31,7 +31,7 @@
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <header class="app-header navbar">
         <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
-        <a class="navbar-brand" href="#">News</a>
+        <a class="navbar-brand" href="#">Flower Garden</a>
         <ul class="nav navbar-nav d-md-down-none">
             <li class="nav-item">
                 <a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
@@ -73,7 +73,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/post')}}"><i class="fa fa-thumb-tack text-success"></i> Post</a>
-                        <a class="nav-link" href="{{url('/admin/page')}}"><i class="fa fa-file text-success"></i> page</a>
+                        <a class="nav-link" href="{{url('/admin/promotion')}}"><i class="fa fa-dollar text-success"></i> Promotion</a>
+                        <a class="nav-link" href="{{url('/admin/room')}}"><i class="fa fa-bed text-success"></i> Room</a>
+                        <a class="nav-link" href="{{url('/admin/page')}}"><i class="fa fa-file text-success"></i> Page</a>
+                        <a class="nav-link" href="{{url('/admin/welcome')}}"><i class="fa fa-home text-success"></i> Welcome</a>
                         <a class="nav-link" href="{{url('/admin/video')}}"><i class="fa fa-youtube text-success"></i> Video</a>
                     </li>
                     <li class="nav-item nav-dropdown">
@@ -116,7 +119,7 @@
     </div>
 
     <footer class="app-footer">
-        Copy &copy; {{date('Y')}} by <a href="#">News</a>
+        Copy &copy; {{date('Y')}} by <a href="#">Flower Gander Cabin</a>
         <span class="float-right">Powered by <a href="http://vdoo.biz" target="_blank">Vdoo Freelance Team</a>
         </span>
     </footer>

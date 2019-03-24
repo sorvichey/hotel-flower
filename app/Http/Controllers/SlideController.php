@@ -93,6 +93,7 @@ class SlideController extends Controller
         $data = array(
             'order' => $r->order
         );
+        DB::table('slides')->where('id', $r->id)->update($data);
         $date = new Datetime('now');
         $get_date_time = $date->format('d-m-Y').'-'.$date->format('H-i-s');
         if ($r->photo) {

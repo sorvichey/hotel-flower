@@ -43,7 +43,7 @@
                                     <td>
                                         <img src="{{asset('uploads/posts/small/'.$p->featured_image)}}" alt="" width="50">
                                     </td>
-                                    <td><a href="{{url('/admin/post/edit/'.$p->id)}}" title="Edit">{{$p->title}}</a></td>
+                                    <td><a href="{{url('/admin/post/view/'.$p->id)}}" title="Detail">{{$p->title}}</a></td>
                                     <td>
                                         <a class="btn btn-xs btn-info"  href="{{url('/admin/post/edit/'.$p->id)}}" title="Edit"><i class="fa fa-pencil"></i></a>
                                        <a class="btn btn-xs btn-danger"  href="{{url('/admin/post/delete/'.$p->id ."?page=".@$_GET["page"])}}" onclick="return confirm('Do you want to delete?')" title="Delete"><i class="fa fa-trash-o"></i></a>

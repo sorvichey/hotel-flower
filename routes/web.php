@@ -2,12 +2,14 @@
 
 // Front End
 Route::get('/',"FrontController@index");
-Route::get('/page/{id}', "FrontPageController@index");
 Route::get('/post/category/{id}', "FrontController@category");
 Route::get('/post/video', "FrontController@video");
 Route::get('/post/detail/{id}', "FrontController@detail");
 Route::get('/video/detail/{id}', "FrontController@video_detail");
-Route::get('/post/{id}', "FrontController@post");
+Route::get('/page/{id}', "FrontController@page");
+Route::get('/room', "FrontController@room");
+Route::get('/promotion', "FrontController@promotion");
+Route::get('/room/detail/{id}', "FrontController@room_detail");
 Auth::routes();
 
 /////////////////////////////////////////////////////////////////////
@@ -21,12 +23,28 @@ Route::get('/admin/dashboard',"HomeController@index");
 // Post
 Route::get('/admin/post', "PostController@index");
 Route::get('/admin/post/create', "PostController@create");
-Route::get('/admin/post/create', "PostController@create");
 Route::post('/admin/post/save', "PostController@save");
 Route::get('/admin/post/delete/{id}', "PostController@delete");
 Route::get('/admin/post/edit/{id}', "PostController@edit");
 Route::post('/admin/post/update', "PostController@update");
 Route::get('/admin/post/view/{id}', "PostController@view");
+
+// room
+Route::get('/admin/room', "RoomController@index");
+Route::get('/admin/room/create', "RoomController@create");
+Route::post('/admin/room/save', "RoomController@save");
+Route::get('/admin/room/delete/{id}', "RoomController@delete");
+Route::get('/admin/room/edit/{id}', "RoomController@edit");
+Route::post('/admin/room/update', "RoomController@update");
+Route::get('/admin/room/view/{id}', "RoomController@view");
+
+// Promotion
+Route::get('/admin/promotion', "PromotionController@index");
+Route::get('/admin/promotion/create', "PromotionController@create");
+Route::post('/admin/promotion/save', "PromotionController@save");
+Route::get('/admin/promotion/delete/{id}', "PromotionController@delete");
+Route::get('/admin/promotion/edit/{id}', "PromotionController@edit");
+Route::post('/admin/promotion/update', "PromotionController@update");
 
 // Page
 Route::get('/admin/page', "PageController@index");
@@ -37,8 +55,6 @@ Route::get('/admin/page/edit/{id}', "PageController@edit");
 Route::post('/admin/page/update', "PageController@update");
 Route::get('/admin/page/view/{id}', "PageController@view");
 
-
-
 // slide show
 Route::get('/admin/slide', "SlideController@index");
 Route::get('/admin/slide/create', "SlideController@create");
@@ -47,13 +63,31 @@ Route::get('/admin/slide/edit/{id}', "SlideController@edit");
 Route::post('/admin/slide/update', "SlideController@update");
 Route::get('/admin/slide/delete/{id}', "SlideController@delete");
 
+// post slide show
+Route::post('/admin/post-slide/save', "PostSlideController@save");
+Route::get('/admin/post-slide/edit/{id}', "PostSlideController@edit");
+Route::post('/admin/post-slide/update', "PostSlideController@update");
+Route::get('/admin/post-slide/delete/{id}', "PostSlideController@delete");
+
+// post slide show
+Route::post('/admin/room-slide/save', "RoomSlideController@save");
+Route::get('/admin/room-slide/edit/{id}', "RoomSlideController@edit");
+Route::post('/admin/room-slide/update', "RoomSlideController@update");
+Route::get('/admin/room-slide/delete/{id}', "RoomSlideController@delete");
+
+// page post gallery
+Route::post('/admin/gallery-post/save', "GalleryPostController@save");
+Route::get('/admin/gallery-post/edit/{id}', "GalleryPostController@edit");
+Route::post('/admin/gallery-post/update', "GalleryPostController@update");
+Route::get('/admin/gallery-post/delete/{id}', "GalleryPostController@delete");
+
 // page slide show
 Route::post('/admin/page-slide/save', "PageSlideController@save");
 Route::get('/admin/page-slide/edit/{id}', "PageSlideController@edit");
 Route::post('/admin/page-slide/update', "PageSlideController@update");
 Route::get('/admin/page-slide/delete/{id}', "PageSlideController@delete");
 
-// page slide show
+// page page gallery
 Route::post('/admin/gallery/save', "GalleryController@save");
 Route::get('/admin/gallery/edit/{id}', "GalleryController@edit");
 Route::post('/admin/gallery/update', "GalleryController@update");
@@ -102,3 +136,12 @@ Route::get('/admin/social/edit/{id}', "SocialController@edit");
 Route::get('/admin/social/delete/{id}', "SocialController@delete");
 Route::post('/admin/social/save', "SocialController@save");
 Route::post('/admin/social/update', "SocialController@update");
+
+
+// welcome
+Route::get('/admin/welcome', "WelcomeController@index");
+Route::get('/admin/welcome/create', "WelcomeController@create");
+Route::get('/admin/welcome/edit/{id}', "WelcomeController@edit");
+Route::get('/admin/welcome/delete/{id}', "WelcomeController@delete");
+Route::post('/admin/welcome/save', "WelcomeController@save");
+Route::post('/admin/welcome/update', "WelcomeController@update");

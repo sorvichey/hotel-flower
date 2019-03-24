@@ -15,18 +15,44 @@ class FrontController extends Controller
         $data['post'] = DB::table('posts')
             ->where('active', 1)
             ->get();
+        $data['welcome'] = DB::table('welcome')
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->first();
+        $data['video'] = DB::table('videos')
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->first();
         return view('fronts.index', $data);
     }
-   public function post($id)
+   public function page($id)
    {
-        $data['video'] = null;
-        
-       $data['post'] = DB::table('posts')
-            ->join('categories', 'posts.category_id', 'categories.id')
-            ->where('posts.id', $id)
-            ->select('posts.*', 'categories.name')
+       $data['page'] = DB::table('pages')
+            ->where('id', $id)
             ->first();
-        return view('fronts.detail', $data);
+        return view('fronts.page', $data);
        
    }
+   public function detail($id)
+   {
+       $data['post'] = DB::table('posts')
+            ->where('id', $id)
+            ->first();
+        return view('fronts.post', $data);
+   }
+   
+   public function room() {
+       $data['rooms'] = DB::table('rooms')->where('active', 1)->get();
+       return view('fronts.room', $data);
+   }
+
+   public function promotion() {
+        $data['promotions'] = DB::table('promotions')->where('active', 1)->get();
+        return view('fronts.promotion', $data);
+    }
+
+   public function room_detail($id) {
+    $data['room'] = DB::table('rooms')->where('active', 1)->where('id', $id)->first();
+    return view('fronts.room-detail', $data);
+}
 }

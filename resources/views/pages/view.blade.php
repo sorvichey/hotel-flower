@@ -13,10 +13,6 @@
                             <p class="text-primary">Title</p>
                             <p>{{$page->title}}</p>
                         </label>
-                        <label for="url" class="control-label col-lg-6 col-sm-6">
-                            <p class="text-primary">URL</p>
-                            <p>{{$page->url}}</p>
-                        </label>
                     </div>
                     <div class="form-group row">
                         <label for="description" class="control-label col-lg-12 col-sm-12">
@@ -164,7 +160,7 @@
                                 <input type="number" name="order" id="order" value="1" class="form-control">
                             </div>
                             <div class="col-lg-2 col-sm-2">
-                                Image <span class="text-info">(width:  1280)</span> <span class="text-danger">*</span>
+                                Image <span class="text-info">(960 x 720)</span> <span class="text-danger">*</span>
                                 <input type="file" class="form-control" name="photo" required id="photo" accept="image/*" onchange="loadFile(event)">
                             </div>
                             <div class="col-lg-2  col-sm-2"><br>
